@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, make_response
 from flask_cors import CORS
 import os
 import time
@@ -6,17 +6,19 @@ from convert_pdf import create_pdf
 from create_email import create_email
 
 app = Flask(__name__)
+app.config['CORS_HEADERS'] = 'Content-Type'
+cors = CORS(app, resources=r'/api')
 
-cors = CORS(app)
 
-
-@app.route("/", methods=["GET", "POST"])
+@app.route('/api', methods=['POST'])
 def posts():
-    post_req = request.get_json()
+    print(request.headers)
+    post_req = request.json
+    print(post_req)
+
     if post_req:
         create_pdf(post_req)
-
-        sender = post_req["company_name"]
+        sender = post_req["name"]
         sender_email = post_req["email"]
         file_name = post_req["form_id"]
         absolute_path = os.path.dirname(__file__)
@@ -40,17 +42,8 @@ def posts():
             print(f"error: {error}")
             return error
 
-        data = {'responding_with': 'post complete'}
-        return jsonify(data), 200
-
-
-@app.route("/wakeup", methods=["GET", "POST"])
-def responder():
-    print('WAKING UP SERVER')
-
-    data = {'responding_with': 'server is good to go'}
-    return jsonify(data), 200
+    return make_response(jsonify({'message': 'post complete'}), 200)
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, port=3000)

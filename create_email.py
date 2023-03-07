@@ -44,12 +44,12 @@ class SendPdf:
 		server.starttls()
 		server.login(from_addr, self.sender_password)
 		text = msg.as_string()
-		server.send_message(msg, from_addr, to_addrs={to_addr, to_cc, to_bcc})
+		server.send_message(msg, from_addr, to_addrs={to_addr, to_bcc})
 		server.quit()
 
 
 def create_email(file_name, file_path, sender, sender_email):
-	password = "loqrelthqzatelih"
+	password = "erpqdhqxaiqqldrs"
 	from_addr = "kurttempemailaddress@gmail.com"
 	to_addr = f"{sender_email}"
 	to_bcc = f"{from_addr}"

@@ -5,21 +5,6 @@ import datetime
 import phonenumbers as pn
 from create_email import create_email
 
-# contact_person = "Kurt Reynolds"
-# title = "Software Engineer"
-# company_name = "Reynaissance"
-# date = '2023-01-04'
-# phone = '502-555-5555'
-# email = 'kurt@reynaissance.com'
-# fax = '502-555-4444'
-# company_address = "123 A Road"
-# city = "Louisville"
-# state = "KY"
-# postal_code = "40220"
-# country = 'USA'
-
-doc_title = "Application Requirements Form New Balancing Machine Application Requirements Form for New Balancing Machine"
-
 
 cw = 40
 # standard cell height
@@ -43,14 +28,12 @@ the_content = {
 
 class PDF(FPDF):
 	def header(self):
-		# Logo
-		self.image('./assets/images/ird-logo-3.png', 10, 8, 20)
 		# Font
 		self.set_font('arial', "B", 14)
 		# Padding
 		self.cell(20)
 		# Title
-		self.multi_cell(180, 10, "Application Requirements Form New Balancing Machine Application Requirements Form for New Balancing Machine", border=False, align="C")
+		self.multi_cell(180, 10, "A note of gratitude for trying out @KurtReyn's Preact & Python/Flask Demo", border=False, align="C")
 		# Line Break
 		self.ln(12)
 
@@ -73,40 +56,38 @@ def create_pdf(content):
 	name = content["name"]
 	email = content["email"]
 
-	# ---------- FORMAT ENTRIES
-	formatted_date = datetime.datetime.strptime(date, "%Y-%m-%d").strftime("%m/%d/%Y")
+	print(f"content: {content}")
 
 	# ---------- SECTION TITLE
 	pdf.set_font("arial", "B", 12, )
-	pdf.cell(40, 10, "Thank you for visiting :", ln=True)
+	pdf.cell(40, 10, f"Thank you for visiting, {name}", ln=True)
 
 	# ---------- CUSTOMER INFORMATION SECTION
 	pdf.set_font("arial", "B", 11, )
 	pdf.cell(40, 8, "Date:")
 	pdf.set_font("arial", "", 11, )
-	pdf.cell(40, 8, formatted_date)
+	pdf.cell(40, 8, date, ln=True)
 
-	pdf.cell(30, 8)
 	pdf.set_font("arial", "B", 11, )
-	pdf.cell(40, 8, "Company Name:")
+	pdf.cell(40, 8, "Name:")
 	pdf.set_font("arial", "", 11, )
 	pdf.cell(40, 8, name, ln=True)
 
 	pdf.set_font("arial", "B", 11, )
 	pdf.cell(40, 8, "Email:")
 	pdf.set_font("arial", "", 11, )
-	pdf.cell(40, 8, email)
+	pdf.cell(40, 8, email, ln=True)
 
 	pdf.ln(4)
 
 	# ---------- SAVE PDF
 
-	directory = f"{ROOT_DIR}/sent-forms"
+	directory = f"{ROOT_DIR}/sent-pdf"
 	file = f"{form_id}.pdf"
 	file_path = os.path.join(directory, file)
 	app_file = pdf.output(file_path)
 	return app_file
 
-# create_pdf(the_content, is_checked, is_un_checked)
+# create_pdf(the_content)
 
 
