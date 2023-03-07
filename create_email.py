@@ -4,8 +4,11 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.mime.base import MIMEBase
 from email import encoders
+from dotenv import load_dotenv
+import os
 warnings.simplefilter("ignore")
 
+load_dotenv()
 
 class SendPdf:
 	def __init__(self, sender_email, receiver_email, receiver_bcc, sender_password, subject, body, file_name, address_of_file):
@@ -49,7 +52,7 @@ class SendPdf:
 
 
 def create_email(file_name, file_path, sender, sender_email):
-	password = "erpqdhqxaiqqldrs"
+	password = "nykwxrimpjbxxful"
 	from_addr = "kurttempemailaddress@gmail.com"
 	to_addr = f"{sender_email}"
 	to_bcc = f"{from_addr}"
