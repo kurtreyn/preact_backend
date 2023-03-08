@@ -23,6 +23,7 @@ the_content = {
 	"date": "2023-01-04",
 	"name": "Kurt",
 	"email": "kurt@reynaissance.com",
+	"message": "Hello, how are you?",
 }
 
 
@@ -82,7 +83,7 @@ def create_pdf(content):
 	pdf.set_font("arial", "B", 11, )
 	pdf.cell(40, 8, "Your message:")
 	pdf.set_font("arial", "", 11, )
-	pdf.cell(100, 16, message, ln=True)
+	pdf.cell(100, 8, message, ln=True)
 
 	pdf.ln(4)
 
