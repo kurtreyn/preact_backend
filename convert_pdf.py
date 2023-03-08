@@ -55,6 +55,7 @@ def create_pdf(content):
 	date = content["date"]
 	name = content["name"]
 	email = content["email"]
+	message = content["message"]
 
 	print(f"content: {content}")
 
@@ -77,6 +78,11 @@ def create_pdf(content):
 	pdf.cell(40, 8, "Email:")
 	pdf.set_font("arial", "", 11, )
 	pdf.cell(40, 8, email, ln=True)
+
+	pdf.set_font("arial", "B", 11, )
+	pdf.cell(40, 8, "Your message:")
+	pdf.set_font("arial", "", 11, )
+	pdf.cell(100, 16, message, ln=True)
 
 	pdf.ln(4)
 
