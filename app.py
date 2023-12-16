@@ -10,6 +10,13 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 cors = CORS(app, resources=r'/api')
 
 
+@app.route("/wakeup", methods=["GET", "POST"])
+def responder():
+    print('WAKING UP SERVER')
+
+    data = {'responding_with': 'server is good to go'}
+    return jsonify(data), 200
+
 @app.route('/api', methods=['POST'])
 def posts():
     print(request.headers)
