@@ -8,6 +8,7 @@ from create_email import create_email
 app = Flask(__name__)
 app.config['CORS_HEADERS'] = 'Content-Type'
 cors = CORS(app, resources=r'/api')
+CORS(app, resources={r"/wakeup": {"origins": "*"}})
 
 
 @app.route("/wakeup", methods=["GET", "POST"])
